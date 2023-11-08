@@ -10,6 +10,7 @@ def index(request):
 class IndexView(TemplateView):
     template_name = "blog/index.html"
     # print("index関数を使ってTOP画面を表示します！")
+
     def get(self, request, *args, **kwargs):
         context = self.get_context_data(**kwargs)
         print("index関数を使ってTOP画面を表示します！")
