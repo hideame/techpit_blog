@@ -1,0 +1,35 @@
+{% extends "./base.html" %}
+
+{% block contents %}
+<div id="wrap" class="clearfix">
+    <div class="content">
+        <div class="main">
+            <h1>記事一覧</h1>
+            {% for item in object_list %}
+            <section>
+                <h1>{{ item.title }}</h1>
+                <ul>
+                    <li>
+                        <a>
+                            <img src="http://127.0.0.1:8000/media/{{ item.category.category_image }}">
+                        </a>
+                        <div class="title"><b>{{ item.category }}</b></div>
+                    </li>
+                    <p>{{  item.content }}</p>
+                </ul>
+            </section>
+            {% endfor %}
+        </div> <!-- end main -->
+
+        <aside class="sidebar">
+            <h2>Category</h2>
+            <ul>
+            {% for category in category_list %}
+                <li>{{ category.category_name }}</li>
+            {% endfor %}
+            </ul>
+        </aside>
+
+    </div> <!-- end content -->
+</div> <!-- end wrap -->
+{% endblock %}
