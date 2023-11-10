@@ -4,8 +4,12 @@
         <div class="content">
             <div class="main">
                 <section class="career">
+                {% if message_type == "create" %}
                     <h1>記事の新規登録</h1>
-                    <form method="POST">{% csrf_token %}
+                {% elif message_type == "edit" %}
+                    <h1>記事の更新</h1>
+                {% endif %}
+                <form method="POST">{% csrf_token %}
                         <table>
                         {{ form }}
                         </table>

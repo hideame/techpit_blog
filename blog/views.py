@@ -31,19 +31,10 @@ class BlogListView(ListView):
         return context
 
 
-class BlogDetailView(DetailView):
-    model = Blog
-    template_name = "blog/blog_detail.html"
-
-    def get_context_data(self, **kwargs):
-        context = super(BlogDetailView, self).get_context_data(**kwargs)
-        context["category_list"] = Category.objects.all()
-        return context
-
-
 class BlogCreateView(CreateView):
     model = Blog
     form_class = BlogForm
+    template_name = "blog/blog_form.html"
     success_url = reverse_lazy("blog:create_done")
 
     def get_context_data(self, **kwargs):
@@ -56,3 +47,31 @@ class BlogCreateView(CreateView):
 def create_done(request):
     category_list = Category.objects.all()
     return render(request, "blog/create_done.html", {"category_list": category_list})
+
+
+class BlogDetailView(DetailView):
+    model = Blog
+    template_name = "blog/blog_detail.html"
+
+    def get_context_data(self, **kwargs):
+        context = super(BlogDetailView, self).get_context_data(**kwargs)
+        context["category_list"] = Category.objects.all()
+        return context
+
+
+class BlogEditView(UpdateView):
+    model = Blog
+    form_class = BlogForm
+    template_name = "blog/blog_form.html"
+    success_url = reverse_lazy("blog:edit_done")
+
+    def get_context_data(self, **kwargs):
+        context = super(BlogEditView, self).get_context_data(**kwargs)
+        context["category_list"] = Category.objects.all()
+        context["message_type"] = "edit"
+        return context
+
+
+def edit_done(request):
+    category_list = Category.objects.all()
+    return render(request, "blog/edit_done.html", {"category_list": category_list})
