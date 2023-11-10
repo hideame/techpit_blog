@@ -1,0 +1,21 @@
+{% extends "./base.html" %}
+{% block contents %}
+    <div id="wrap" class="clearfix">
+        <div class="content">
+            <div class="main">
+                <section class="career">
+                    <p>タイトル【<span class=delete-tiltle>{{ object }}</span>】のデータを削除していいですか？</p>
+                    <form method="post">{% csrf_token %}
+                        <button class="button">削除</button>
+                    </form>
+                </section>
+                <table>
+                    <tr>
+                        <td><p class="btn"><a href="{% url 'blog:blog_list' %}">戻る</a></p></td>
+                    </tr>
+                </table>
+            </div> <!-- end main -->
+        {% include "blog/widgets/side_category.html" %}
+        </div> <!-- end content -->
+    </div> <!-- end wrap -->
+{% endblock %}
