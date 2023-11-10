@@ -1,0 +1,24 @@
+{% extends "./base.html" %}
+{% block contents %}
+    <div id="wrap" class="clearfix">
+        <div class="content">
+            <div class="main">
+                <section class="career">
+                    <h1>記事の新規登録</h1>
+                    <form method="POST">{% csrf_token %}
+                        <table>
+                        {{ form }}
+                        </table>
+                        <button class="button" type="submit">登録</button>
+                    </form>
+                </section>
+                <table>
+                    <tr>
+                        <td><p class="btn"><a href="{% url 'blog:blog_list' %}">戻る</a></p></td>
+                    </tr>
+                </table>
+            </div> <!-- end main -->
+        {% include "blog/widgets/side_category.html" %}
+        </div> <!-- end content -->
+    </div> <!-- end wrap -->
+{% endblock %}

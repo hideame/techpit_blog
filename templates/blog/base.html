@@ -16,8 +16,8 @@
     <header>
         <nav>
             <ul class="global-nav">
-                <li><a href="">記事一覧</a></li>
-                <li><a href="">新規作成</a></li>
+                <li><a href="{% url 'blog:blog_list' %}">記事一覧</a></li>
+                <li><a href="{% url 'blog:create' %}">新規作成</a></li>
             </ul>
         </nav>
     </header>

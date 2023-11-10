@@ -1,6 +1,8 @@
 from django.shortcuts import render
+from django.urls import reverse_lazy
 from django.views.generic import CreateView, DeleteView, DetailView, ListView, TemplateView, UpdateView
 
+from .forms import BlogForm
 from .models import Blog, Category
 
 
@@ -27,3 +29,20 @@ class BlogListView(ListView):
         context = super(BlogListView, self).get_context_data(**kwargs)
         context["category_list"] = Category.objects.all()
         return context
+
+
+class BlogCreateView(CreateView):
+    model = Blog
+    form_class = BlogForm
+    success_url = reverse_lazy("blog:create_done")
+
+    def get_context_data(self, **kwargs):
+        context = super(BlogCreateView, self).get_context_data(**kwargs)
+        context["category_list"] = Category.objects.all()
+        context["message_type"] = "create"
+        return context
+
+
+def create_done(request):
+    category_list = Category.objects.all()
+    return render(request, "blog/create_done.html", {"category_list": category_list})
