@@ -5,7 +5,12 @@
     <div class="content">
         <div class="main">
             <h1>記事一覧</h1>
-            {% for item in object_list %}
+            <form class="form-inline my-2 my-lg-0" action="{% url 'blog:search_list' %}" method="GET">
+                <input class="form-control mr-sm-2" type="search" name="q" value="{{ request.GET.q }}" placeholder="Search" aria-label="Search">
+                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">検索</button>
+            </form>
+
+        {% for item in object_list %}
             <section>
                 <h1>{{ item.title }}</h1>
                 <ul>
@@ -18,7 +23,7 @@
                     <p>{{ item.content|linebreaksbr|truncatechars:100 }}<a href="{% url 'blog:detail' item.pk %}">詳しく見る</a></p>
                 </ul>
             </section>
-            {% endfor %}
+        {% endfor %}
         </div> <!-- end main -->
     {% include "blog/widgets/side_category.html" %}
     </div> <!-- end content -->
