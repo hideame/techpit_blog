@@ -1,3 +1,4 @@
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.db.models import Q
 from django.shortcuts import render
 from django.urls import reverse_lazy
@@ -32,7 +33,7 @@ class BlogListView(ListView):
         return context
 
 
-class BlogCreateView(CreateView):
+class BlogCreateView(LoginRequiredMixin, CreateView):
     model = Blog
     form_class = BlogForm
     template_name = "blog/blog_form.html"
@@ -60,7 +61,7 @@ class BlogDetailView(DetailView):
         return context
 
 
-class BlogEditView(UpdateView):
+class BlogEditView(LoginRequiredMixin, UpdateView):
     model = Blog
     form_class = BlogForm
     template_name = "blog/blog_form.html"
@@ -78,7 +79,7 @@ def edit_done(request):
     return render(request, "blog/edit_done.html", {"category_list": category_list})
 
 
-class BlogDeleteView(DeleteView):
+class BlogDeleteView(LoginRequiredMixin, DeleteView):
     model = Blog
     template_name = "blog/blog_confirm_delete.html"
     success_url = reverse_lazy("blog:delete_done")
